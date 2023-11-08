@@ -177,8 +177,22 @@ MappedT& operator[](const KeyT& key) {
 - if not, we have to go up (go toward root) until we find one that is `more` than `x`
   - this is always the cloest `ancestor` of `x` that has `x` in its `left-subtree`
 
-```cp
-
+```cpp
+tree_iterator& operator++() {
+    if (ptr->right == NULL) {
+        node *parent = ptr->parent;
+        while (parent != NULL && parent->right == ptr) {
+            ptr = parent;
+            parent = ptr->parent;
+        }
+        ptr = parent;
+    } else {
+        ptr = ptr->right;
+        while (ptr->left != NULL)
+            ptr = ptr->left;
+    }
+    return (*this);
+}
 ```
 
 **Operator--**
