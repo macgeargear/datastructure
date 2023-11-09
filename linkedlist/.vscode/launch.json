@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/macgeargear/learn/datastructure/grader/linkedlist",
-      "program": "/Users/macgeargear/learn/datastructure/grader/linkedlist/build/Debug/outDebug"
+      "cwd": "/Users/macgeargear/learn/datastructure/grader/linkedlist/d60_q3_lremove_all",
+      "program": "/Users/macgeargear/learn/datastructure/grader/linkedlist/d60_q3_lremove_all/build/Debug/outDebug"
     }
   ]
 }

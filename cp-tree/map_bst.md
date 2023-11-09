@@ -129,6 +129,7 @@ size_t erase(const KeyT& &key) {
     node *ptr = find_node(key, mRoot, parent);
     if (ptr == NULL) return 0;
     if (ptr->left != NULL && ptr->right) {
+        // have 2 child
         // delete min
         node *min = find_min_node(ptr->right);
         node* &link = child_link(min->parent, min->data.first);

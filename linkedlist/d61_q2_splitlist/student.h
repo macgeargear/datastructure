@@ -1,29 +1,31 @@
 #include <iostream>
 
+#include "list.h"
+
 void splitList(list<T>& list1, list<T>& list2) {
-    // Add your code here
-    int m = mSize % 2 == 0 ? mSize / 2 : mSize / 2 + 1;
-    auto it = begin();
-    for (int i = 1; i < m; i++)
+    size_t pos = mSize % 2 == 0 ? (mSize / 2) : (mSize / 2 + 1);
+    iterator it = begin();
+    for (size_t i = 0; i < pos; i++)
         it++;
 
-    auto tmp = it.ptr->next;
-
-    it.ptr->next = list1.mHeader;
+    // fix list1
     list1.mHeader->prev->next = mHeader->next;
     mHeader->next->prev = list1.mHeader->prev;
-    list1.mHeader->prev = it.ptr;
-    list1.mSize += m;
+    list1.mHeader->prev->next = list1.mHeader;
+    it.ptr->prev->next = list1.mHeader;
 
-    list2.mHeader->prev->next = tmp;
+    // fix list2
+    it.ptr->prev = list1.mHeader->prev;
+    list2.mHeader->prev->next = it.ptr;
     list2.mHeader->prev = mHeader->prev;
-    tmp->prev = list2.mHeader;
     mHeader->prev->next = list2.mHeader;
-    list2.mSize += mSize - m;
 
-    clear();
-    // mHeader->next = NULL;
-    // mHeader->prev = NULL;
-    std::cout << list1.size() << " " << list2.size() << " " << size() << "\n";
+    // fix *this
+    mHeader->prev = mHeader;
+    mHeader->next = mHeader;
+
+    // fix Size
     mSize = 0;
+    list1.mSize = pos;
+    list2.mSize = mSize - pos;
 }
